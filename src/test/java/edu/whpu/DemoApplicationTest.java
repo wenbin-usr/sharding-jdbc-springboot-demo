@@ -20,8 +20,9 @@ public class DemoApplicationTest {
     @Test
     public void test() {
         Student student = new Student();
-        student.setAge(21);
-        student.setName("张程程");
+        student.setAge(45);
+        student.setStuNo("10015");
+        student.setName("康黎明");
         studentService.save(student);
     }
 
