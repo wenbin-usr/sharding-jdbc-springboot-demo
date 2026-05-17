@@ -2,11 +2,15 @@ package edu.whpu;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import edu.whpu.entity.Order;
 import edu.whpu.entity.Student;
+import edu.whpu.mapper.OrderMapper;
 import edu.whpu.service.StudentService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.math.BigDecimal;
 
 /**
  * @author bin_wen
@@ -16,6 +20,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class DemoApplicationTest {
     @Autowired
     private StudentService studentService;
+
+    @Autowired
+    private OrderMapper orderMapper;
 
     @Test
     public void test() {
@@ -32,5 +39,17 @@ public class DemoApplicationTest {
         wrapper.eq(Student::getName, "张三");
         Student student = studentService.getOne(wrapper);
         System.out.println(student);
+    }
+
+    @Test
+    public void test2() {
+        for (long i = 1; i < 5; i++) {
+
+            Order order = new Order();
+            order.setOrderNo("order" + i);
+            order.setUserId(1L);
+            order.setAmount(new BigDecimal(100));
+            orderMapper.insert(order);
+        }
     }
 }
