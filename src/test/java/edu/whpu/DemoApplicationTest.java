@@ -43,13 +43,24 @@ public class DemoApplicationTest {
 
     @Test
     public void test2() {
-        for (long i = 1; i < 2; i++) {
+        for (long i = 1; i < 3; i++) {
 
             Order order = new Order();
             order.setOrderNo("order" + i);
-            order.setUserId(1L);
+            order.setUserId(100000L);
             order.setAmount(new BigDecimal(100));
             orderMapper.insert(order);
+            System.out.println("------------");
+        }
+
+        for (long i = 1; i < 3; i++) {
+
+            Order order = new Order();
+            order.setOrderNo("order" + i);
+            order.setUserId(100001L);
+            order.setAmount(new BigDecimal(100));
+            orderMapper.insert(order);
+            System.out.println("------------");
         }
     }
 }
