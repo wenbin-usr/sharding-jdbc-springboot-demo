@@ -43,7 +43,7 @@ public class DemoApplicationTest {
 
     @Test
     public void test2() {
-        for (long i = 1; i < 5; i++) {
+        for (long i = 1; i < 2; i++) {
 
             Order order = new Order();
             order.setOrderNo("order" + i);

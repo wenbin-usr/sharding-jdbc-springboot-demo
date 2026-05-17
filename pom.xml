@@ -48,10 +48,11 @@
       <version>5.2.1</version>
     </dependency>
 
+    <!-- ShardingSphere 5.2+ 需要 setCodePointLimit，Spring Boot 2.7 默认 snakeyaml 1.30 不含该方法 -->
     <dependency>
-      <groupId>org.apache.shardingsphere</groupId>
-      <artifactId>shardingsphere-mode-type-standalone</artifactId>
-      <version>5.2.1</version>
+      <groupId>org.yaml</groupId>
+      <artifactId>snakeyaml</artifactId>
+      <version>1.33</version>
     </dependency>
 
     <dependency>
