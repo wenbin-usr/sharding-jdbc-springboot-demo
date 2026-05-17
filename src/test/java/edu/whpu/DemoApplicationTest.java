@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * @author bin_wen
@@ -46,8 +47,8 @@ public class DemoApplicationTest {
         for (long i = 1; i < 3; i++) {
 
             Order order = new Order();
-            order.setOrderNo("order" + i);
-            order.setUserId(100000L);
+            order.setOrderNo("order" + i);   // 按order_no分表，hash取模，哈希值为偶数插入t_order0表，为奇数插入t_order1表
+            order.setUserId(100000L);  // 按user_id分库，为偶数插入ds0数据库，为奇数插入ds1数据库
             order.setAmount(new BigDecimal(100));
             orderMapper.insert(order);
             System.out.println("------------");
@@ -63,4 +64,21 @@ public class DemoApplicationTest {
             System.out.println("------------");
         }
     }
+
+    @Test
+    public void testShardingSelectAll(){
+
+        List<Order> orders = orderMapper.selectList(null);
+        orders.forEach(System.out::println);
+    }
+
+    @Test
+    public void testShardingSelectByUserId(){
+
+        QueryWrapper<Order> orderQueryWrapper = new QueryWrapper<>();
+        orderQueryWrapper.eq("user_id", 100000L);
+        List<Order> orders = orderMapper.selectList(orderQueryWrapper);
+        orders.forEach(System.out::println);
+    }
+
 }
